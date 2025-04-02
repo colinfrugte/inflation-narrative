@@ -13,9 +13,12 @@
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
+    "@heroicons/react": "^2.2.0",
+    "@xyflow/react": "^12.5.3",
     "gh-pages": "^6.3.0",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "reagraph": "^4.21.5"
   },
   "devDependencies": {
     "@eslint/js": "^9.21.0",
