@@ -1,54 +1,65 @@
-# React + TypeScript + Vite
+# 🧠 Economic Narratives of Inflation — Master’s Thesis Project
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This repository contains the code and experimental framework for my master’s thesis at the University of Hamburg, focusing on **extracting and visualizing economic narratives about inflation** using **Large Language Models (LLMs)** and **graph-based representations**.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 📘 Overview
 
-## Expanding the ESLint configuration
+Economic narratives—how people *explain* macroeconomic phenomena like inflation—shape public perception and policy expectations.  
+This project explores how modern NLP techniques can automatically extract such narratives from open-ended survey responses and transform them into **graph structures** of interconnected economic concepts.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Each **node** represents a concept (e.g., “war”, “energy prices”, “ECB policy”), while **edges** capture causal relations between them (e.g., *“war → supply shortages”*).
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+---
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🧩 Research Goals
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+1. **Extract economic concepts** from textual survey responses  
+2. **Identify causal relations** between these concepts  
+3. **Represent and visualize** the results as a semantic graph  
+4. **Evaluate** the accuracy, recall, and structure of extracted narratives  
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+---
+
+## ⚙️ Architecture
+
+The pipeline combines multiple NLP components:
+
+- **Node Extraction:**  
+  - Fine-tuned BERT-based multi-label classifier  
+  - Zero-shot extraction using [GLiNER](https://huggingface.co/urchade/gliner-large)  
+  - Experiments with SetFit for small data scenarios  
+
+- **Edge (Relation) Extraction:**  
+  - Cross-Encoder model predicting causal links between detected nodes  
+  - Comparison of pattern-based, QA-based, and similarity-based approaches  
+
+- **Graph Construction:**  
+  - Nodes and edges aggregated into interpretable narrative graphs  
+  - Interactive visualization with React/Next.js frontend  
+
+---
+
+## 📊 Evaluation
+
+Metrics include:
+- **Concept recall** (coverage of relevant narrative elements)
+- **Edge precision** (accuracy of detected causal relations)
+- **Micro-F1** for end-to-end performance  
+- Analysis of **long-tailed label distributions** to assess model robustness  
+
+---
+
+## 🧠 Technologies
+
+| Category | Tools |
+|-----------|-------|
+| **Modeling** | PyTorch, Hugging Face Transformers, SetFit, GLiNER |
+| **Data Handling** | Pandas, Scikit-learn |
+| **Visualization** | React, Next.js, TailwindCSS, vis-network |
+| **Environment** | Conda, SEMS GPU Cluster (Uni Hamburg) |
+
+---
+
+## 🧭 Repository Structure
